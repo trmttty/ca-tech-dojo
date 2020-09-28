@@ -1,19 +1,19 @@
 version: '3'
 services: 
-    # api:
-        # container_name: game-api
-        # build:
-        #     context: ./api
-        #     dockerfile: Dockerfile
-        # depends_on: 
-        #     - db
-        # restart: unless-stopped
-        # environment: 
-        #     API_SECRET: sample_api_secret
-        # ports: 
-        #     - 8080:80
-        # networks: 
-        #     - game-api
+    api:
+        container_name: game-api
+        build:
+            context: ./api
+            dockerfile: Dockerfile
+        depends_on: 
+            - db
+        restart: unless-stopped
+        environment: 
+            API_SECRET: sample_api_secret
+        ports: 
+            - 8080:80
+        networks: 
+            - game-api
 
     db:
         image: mysql:latest
@@ -37,17 +37,17 @@ services:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
         depends_on:
-          - db
+            - db
         environment:
             PMA_HOST: db
             PMA_USER: game
             PMA_PASSWORD: game
             PMA_PORT: 3306
         ports:
-          - 9090:80
+            - 9090:80
         restart: always
         networks:
-          - game-api
+            - game-api
 
 networks: 
     game-api:
