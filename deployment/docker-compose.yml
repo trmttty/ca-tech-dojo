@@ -1,19 +1,22 @@
 version: '3'
 services: 
-#     api:
-#         container_name: game-api
-#         build:
-#             context: ./api
-#             dockerfile: Dockerfile
-#         depends_on: 
-#             - db
-#         restart: unless-stopped
-#         environment: 
-#             API_SECRET: sample_api_secret
-#         ports: 
-#             - 8080:80
-#         networks: 
-#             - game-api
+    api:
+        container_name: game-api
+        build:
+            context: ../build
+        depends_on: 
+            - db
+        restart: unless-stopped
+        environment: 
+            API_SECRET: sample_api_secret
+        ports: 
+            - 8080:8080
+        networks: 
+            - game-api
+        volumes: 
+            - ..:/ca-tech-dojo
+        command: "go run /ca-tech-dojo/cmd/game-api/main.go"
+
     db:
         image: mysql:latest
         container_name: game_db
