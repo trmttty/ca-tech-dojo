@@ -1,50 +1,40 @@
 package models
 
-import "time"
+import (
+	"database/sql"
+	"time"
+)
 
+// User model
 type User struct {
-	ID        int       `json:"id"`
-	UserName  string    `json:"name"`
-	Token     string    `json:"token"`
+	ID        int    `json:"id"`
+	UserName  string `json:"name"`
+	Token     Token
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// type UserCreateRequest struct {
-// 	UserName string `json:"name"`
-// }
+// CreateUser create user
+func (user *User) CreateUser(db *sql.DB) (err error) {
+	res, err := db.Exec("INSERT INTO users (name) VALUES (?)", user.UserName)
+	if err != nil {
+		return
+	}
 
-// type UserCreateResponse struct {
-// 	Token string `json:"token"`
-// }
+	id, err := res.LastInsertId()
+	if err != nil {
+		return
+	}
+	user.ID = int(id)
+	return
+}
 
-// type UserGetResponse struct {
-// 	UserName string `json:"name"`
-// }
+func GetUserName(id int, db *sql.DB) (userName string, err error) {
+	err = db.QueryRow("SELECT name from users WHERE id = ?", id).Scan(&userName)
+	return
+}
 
-// type UserUpdateRequest struct {
-// 	UserName string `json:"name"`
-// }
-
-// type GachaDrawRequest struct {
-// 	GachaTimes int `json:"times"`
-// }
-
-// type GachaDrawResponse struct {
-// 	GachaResults []GachaResult `json:"results"`
-// }
-
-// type GachaResult struct {
-// 	CharacterID   string `json:"characterID"`
-// 	CharacterName string `json:"name"`
-// }
-
-// type CharacterListResponse struct {
-// 	UserCharacters []UserCharacter `json:"characters"`
-// }
-
-// type UserCharacter struct {
-// 	UserCharacterID string `json:"userCharacterID"`
-// 	CharacterID     string `json:"characterID"`
-// 	UserName        string `json:"name"`
-// }
+func (user *User) UpdateUser(db *sql.DB) (err error) {
+	_, err = db.Exec("UPDATE users SET name=? WHERE id=?", user.UserName, user.ID)
+	return
+}

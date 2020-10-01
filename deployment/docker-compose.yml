@@ -26,6 +26,7 @@ services:
             MYSQL_DATABASE: game_db
             MYSQL_USER: game
             MYSQL_PASSWORD: game
+        # command: --lower_case_table_names=0
         ports: 
             - 3306:3306
         restart: unless-stopped
