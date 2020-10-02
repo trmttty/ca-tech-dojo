@@ -15,18 +15,17 @@ services:
             - game-api
         volumes: 
             - ..:/ca-tech-dojo
-        command: "go run /ca-tech-dojo/cmd/game-api/main.go"
+        command: "go run /ca-tech-dojo/cmd/game-api/server.go"
 
     db:
         image: mysql:latest
-        container_name: game_db
+        container_name: game-db
         environment: 
             MYSQL_ROOT_HOST: db
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: game_db
+            MYSQL_DATABASE: game-db
             MYSQL_USER: game
             MYSQL_PASSWORD: game
-        # command: --lower_case_table_names=0
         ports: 
             - 3306:3306
         restart: unless-stopped
@@ -38,7 +37,7 @@ services:
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
-        container_name: phpmyadmin
+        container_name: game-phpmyadmin
         depends_on:
             - db
         environment:

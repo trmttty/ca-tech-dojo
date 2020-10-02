@@ -1,22 +1,21 @@
 package models
 
 import (
-	"database/sql"
 	"time"
+
+	db "github.com/trmttty/ca-tech-dojo/internal/database"
 )
 
 // User model
 type User struct {
-	ID        int    `json:"id"`
-	UserName  string `json:"name"`
-	Token     Token
+	ID        int       `json:"id"`
+	UserName  string    `json:"name"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// CreateUser create user
-func (user *User) CreateUser(db *sql.DB) (err error) {
-	res, err := db.Exec("INSERT INTO users (name) VALUES (?)", user.UserName)
+func (user *User) CreateUser() (err error) {
+	res, err := db.Db.Exec("INSERT INTO users (name) VALUES (?)", user.UserName)
 	if err != nil {
 		return
 	}
@@ -29,12 +28,12 @@ func (user *User) CreateUser(db *sql.DB) (err error) {
 	return
 }
 
-func GetUserName(id int, db *sql.DB) (userName string, err error) {
-	err = db.QueryRow("SELECT name from users WHERE id = ?", id).Scan(&userName)
+func (user *User) UpdateUser() (err error) {
+	_, err = db.Db.Exec("UPDATE users SET name=? WHERE id=?", user.UserName, user.ID)
 	return
 }
 
-func (user *User) UpdateUser(db *sql.DB) (err error) {
-	_, err = db.Exec("UPDATE users SET name=? WHERE id=?", user.UserName, user.ID)
+func GetUserName(id int) (userName string, err error) {
+	err = db.Db.QueryRow("SELECT name from users WHERE id = ?", id).Scan(&userName)
 	return
 }
