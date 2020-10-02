@@ -1,9 +1,7 @@
-package models
+package data
 
 import (
 	"time"
-
-	db "github.com/trmttty/ca-tech-dojo/internal/database"
 )
 
 // User model
@@ -15,7 +13,7 @@ type User struct {
 }
 
 func (user *User) CreateUser() (err error) {
-	res, err := db.Db.Exec("INSERT INTO users (name) VALUES (?)", user.UserName)
+	res, err := Db.Exec("INSERT INTO users (name) VALUES (?)", user.UserName)
 	if err != nil {
 		return
 	}
@@ -29,11 +27,11 @@ func (user *User) CreateUser() (err error) {
 }
 
 func (user *User) UpdateUser() (err error) {
-	_, err = db.Db.Exec("UPDATE users SET name=? WHERE id=?", user.UserName, user.ID)
+	_, err = Db.Exec("UPDATE users SET name=? WHERE id=?", user.UserName, user.ID)
 	return
 }
 
 func GetUserName(id int) (userName string, err error) {
-	err = db.Db.QueryRow("SELECT name from users WHERE id = ?", id).Scan(&userName)
+	err = Db.QueryRow("SELECT name from users WHERE id = ?", id).Scan(&userName)
 	return
 }

@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/trmttty/ca-tech-dojo/internal/auth"
-	"github.com/trmttty/ca-tech-dojo/internal/models"
+	"github.com/trmttty/ca-tech-dojo/internal/data"
 )
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
@@ -21,7 +21,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var user = models.User{}
+	var user = data.User{}
 	var err error
 	user.ID, err = auth.ParseToken(tokenString)
 	if err != nil {
