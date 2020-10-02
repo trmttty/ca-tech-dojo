@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/trmttty/ca-tech-dojo/internal/auth"
-	"github.com/trmttty/ca-tech-dojo/internal/models"
+	"github.com/trmttty/ca-tech-dojo/internal/data"
 )
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
@@ -19,7 +19,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	body := make([]byte, len)
 	r.Body.Read(body)
 
-	user := models.User{}
+	user := data.User{}
 	err := json.Unmarshal(body, &user)
 	if err != nil {
 		log.Printf("Body parse error, %v", err)

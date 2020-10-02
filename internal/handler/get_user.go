@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/trmttty/ca-tech-dojo/internal/auth"
-	"github.com/trmttty/ca-tech-dojo/internal/models"
+	"github.com/trmttty/ca-tech-dojo/internal/data"
 )
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
@@ -29,7 +29,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var userName = make(map[string]interface{})
-	userName["name"], err = models.GetUserName(id)
+	userName["name"], err = data.GetUserName(id)
 	if err != nil {
 		log.Printf("Get user name DB error, %v", err)
 		w.WriteHeader(http.StatusInternalServerError)
