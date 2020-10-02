@@ -1,2 +1,2 @@
-## ディレクトリ 構造を変更
-## https://github.com/golang-standards/project-layout
+## TechTrain MISSION
+https://github.com/trmttty/techtrain-mission
