@@ -49,7 +49,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-type", "application/json")
 	w.Write(response)
 	return
 }

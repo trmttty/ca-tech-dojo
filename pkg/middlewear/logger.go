@@ -11,6 +11,6 @@ func Logger(h http.HandlerFunc) http.HandlerFunc {
 		startTime := time.Now()
 		h(w, r)
 		endTime := time.Since(startTime)
-		log.Printf("%s %s %s %v", r.URL, r.Host, r.Method, endTime)
+		log.Printf("%s %s %s %v", r.URL, r.Method, r.Host, endTime)
 	}
 }

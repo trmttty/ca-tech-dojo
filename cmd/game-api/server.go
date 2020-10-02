@@ -14,5 +14,5 @@ func main() {
 	http.HandleFunc("/user/get", mw.Logger(mw.Cors(auth.Authenticate(handler.GetUser))))
 	http.HandleFunc("/user/update", mw.Logger(mw.Cors(auth.Authenticate(handler.UpdateUser))))
 
-	log.Fatalln(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
