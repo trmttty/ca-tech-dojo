@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -16,24 +15,16 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		log.Printf("Body parse error, %v", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-
 	userName := data.UserCreateRequest{}
-	err = json.Unmarshal(body, &userName)
-	if err != nil {
-		log.Printf("Body unmarshal error, %v", err)
+	if err := json.NewDecoder(r.Body).Decode(&userName); err != nil {
+		log.Printf("Json decode error, %v", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
 	user := data.User{}
 	user.UserName = userName.Name
-	err = user.CreateUser()
+	err := user.CreateUser()
 	if err != nil {
 		log.Printf("Create user DB error, %v", err)
 		w.WriteHeader(http.StatusInternalServerError)
