@@ -28,8 +28,8 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var userName = make(map[string]interface{})
-	userName["name"], err = data.GetUserName(id)
+	userName := data.UserGetResponse{}
+	userName.Name, err = data.GetUserName(id)
 	if err != nil {
 		log.Printf("Get user name DB error, %v", err)
 		w.WriteHeader(http.StatusInternalServerError)

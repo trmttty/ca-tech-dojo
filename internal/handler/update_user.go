@@ -33,13 +33,16 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
-	err = json.Unmarshal(body, &user)
+
+	userName := data.UserUpdateRequest{}
+	err = json.Unmarshal(body, &userName)
 	if err != nil {
 		log.Printf("Body parse error, %v", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
+	user.UserName = userName.Name
 	err = user.UpdateUser()
 	if err != nil {
 		log.Printf("Update user name DB error, %v", err)
