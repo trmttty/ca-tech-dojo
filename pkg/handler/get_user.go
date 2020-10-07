@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/trmttty/ca-tech-dojo/internal/auth"
-	"github.com/trmttty/ca-tech-dojo/internal/data"
+	"github.com/trmttty/ca-tech-dojo/pkg/auth"
+	"github.com/trmttty/ca-tech-dojo/pkg/data"
 )
 
 func GetUser(w http.ResponseWriter, r *http.Request) {

@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/trmttty/ca-tech-dojo/internal/auth"
-	"github.com/trmttty/ca-tech-dojo/internal/handler"
+	"github.com/trmttty/ca-tech-dojo/pkg/auth"
+	"github.com/trmttty/ca-tech-dojo/pkg/handler"
 	mw "github.com/trmttty/ca-tech-dojo/pkg/middlewear"
 )
 
