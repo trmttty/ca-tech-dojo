@@ -1,40 +1,40 @@
 package data
 
 type UserCreateRequest struct {
-	Name string
+	Name string `json:"name"`
 }
 
 type UserCreateResponse struct {
-	Token string
+	Token string `json:"token"`
 }
 
 type UserGetResponse struct {
-	Name string
+	Name string `json:"name"`
 }
 
 type UserUpdateRequest struct {
-	Name string
+	Name string `json:"name"`
 }
 
 type GachaDrawRequest struct {
-	Times int
+	Times int `json:"times"`
 }
 
 type GachaDrawResponse struct {
-	Results []GachaResult
+	Results []GachaResult `json:"results"`
 }
 
 type GachaResult struct {
-	CharacterID string
-	Name        string
+	CharacterID string `json:"characterID"`
+	Name        string `json:"name"`
 }
 
 type UserCharacter struct {
-	UserCharacterID string
-	CharacterID     string
-	Name            string
+	UserCharacterID string `json:"userCharacterID"`
+	CharacterID     string `json:"characterID"`
+	Name            string `json:"name"`
 }
 
 type CharacterListResponse struct {
-	Characters []UserCharacter
+	Characters []UserCharacter `json:"characters"`
 }
