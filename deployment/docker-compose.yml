@@ -13,7 +13,7 @@ services:
             - game-api
         volumes: 
             - ..:/ca-tech-dojo
-        command: "go run /ca-tech-dojo/cmd/game-api/server.go"
+        command: "go run /ca-tech-dojo/cmd/game-api/main.go"
 
     db:
         image: mysql:latest
