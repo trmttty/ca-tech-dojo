@@ -5,28 +5,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/trmttty/ca-tech-dojo/pkg/auth"
 	"github.com/trmttty/ca-tech-dojo/pkg/data"
 )
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPut {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-
-	tokenString := r.Header.Get("x-token")
-	if tokenString == "" {
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
-
-	var user = data.User{}
-	var err error
-	user.ID, err = auth.ParseToken(tokenString)
-	if err != nil {
-		log.Printf("Parse token error, %v", err)
-		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
@@ -37,9 +21,10 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var user = data.User{}
+	user.ID = r.Context().Value("user-id").(int)
 	user.UserName = userName.Name
-	err = user.UpdateUser()
-	if err != nil {
+	if err := user.UpdateUser(); err != nil {
 		log.Printf("Update user name DB error, %v", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
