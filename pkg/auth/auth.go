@@ -10,9 +10,9 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
-type contextKey string
+// type contextKey string
 
-const userIdKey contextKey = "user-id"
+// const userIdKey contextKey = "user-id"
 
 var jwtKey = []byte("my_secret_key")
 
@@ -57,7 +57,7 @@ func Authenticate(h http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 
-		ctx := context.WithValue(r.Context(), userIdKey, id)
+		ctx := context.WithValue(r.Context(), "user-id", id)
 		r = r.WithContext(ctx)
 		h(w, r)
 	}
