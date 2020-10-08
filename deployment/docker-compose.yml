@@ -13,6 +13,13 @@ services:
             - game-api
         volumes: 
             - ..:/ca-tech-dojo
+        environment: 
+            MYSQL_HOST: game-db
+            MYSQL_DATABASE: game-db
+            MYSQL_PORT: 3306
+            MYSQL_USER: game
+            MYSQL_PASSWORD: game
+            JWT_KEY: my_secret_key
         command: "go run /ca-tech-dojo/cmd/game-api/main.go"
 
     db:
