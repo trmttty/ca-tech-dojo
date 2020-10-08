@@ -4,17 +4,14 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
-// type contextKey string
-
-// const userIdKey contextKey = "user-id"
-
-var jwtKey = []byte("my_secret_key")
+var jwtKey = []byte(os.Getenv("JWT_KEY"))
 
 func CreateToken(userID int) (tokenString string, err error) {
 	token := jwt.New(jwt.SigningMethodHS256)

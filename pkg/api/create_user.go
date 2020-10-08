@@ -24,14 +24,14 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	user := data.User{}
 	user.UserName = userName.Name
-	err := user.CreateUser()
-	if err != nil {
+	if err := user.CreateUser(); err != nil {
 		log.Printf("Create user DB error, %v", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
 	token := data.UserCreateResponse{}
+	var err error
 	token.Token, err = auth.CreateToken(user.ID)
 	if err != nil {
 		log.Printf("Create token error, %v", err)
