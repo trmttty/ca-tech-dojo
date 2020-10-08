@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"strconv"
@@ -8,6 +9,10 @@ import (
 
 	jwt "github.com/dgrijalva/jwt-go"
 )
+
+type contextKey string
+
+const userIdKey contextKey = "user-id"
 
 var jwtKey = []byte("my_secret_key")
 
@@ -45,13 +50,15 @@ func Authenticate(h http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 
-		var err error
-		_, err = ParseToken(tokenString)
+		id, err := ParseToken(tokenString)
 		if err != nil {
 			log.Println("Authentication error")
 			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
+
+		ctx := context.WithValue(r.Context(), userIdKey, id)
+		r = r.WithContext(ctx)
 		h(w, r)
 	}
 }
