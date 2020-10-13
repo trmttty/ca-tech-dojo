@@ -2,8 +2,8 @@ package injector
 
 import (
 	"github.com/trmttty/ca-tech-dojo/domain/repository"
-	"github.com/trmttty/ca-tech-dojo/handler"
 	"github.com/trmttty/ca-tech-dojo/infrastructure"
+	"github.com/trmttty/ca-tech-dojo/interface/handler"
 	"github.com/trmttty/ca-tech-dojo/usecase"
 )
 
