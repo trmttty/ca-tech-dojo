@@ -1,16 +1,13 @@
 package main
 
 import (
-	"github.com/trmttty/ca-tech-dojo/handler"
-	"github.com/trmttty/ca-tech-dojo/infrastructure"
-	"github.com/trmttty/ca-tech-dojo/usecase"
+	"github.com/trmttty/ca-tech-dojo/injector"
+	"github.com/trmttty/ca-tech-dojo/interface/handler"
 )
 
 func main() {
-	sqlHandler := infrastructure.NewSqlHandler()
-	userRepository := infrastructure.NewUserRepository(sqlHandler)
-	userUsecase := usecase.NewUserUsecase(userRepository)
-	userHandler := handler.NewUserHandler(userUsecase)
+
+	userHandler := injector.InjectUserHandler()
 
 	handler.Run(userHandler)
 }

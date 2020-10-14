@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/trmttty/ca-tech-dojo/pkg/auth"
+	"github.com/trmttty/ca-tech-dojo/interface/auth"
 	"github.com/trmttty/ca-tech-dojo/usecase"
 )
 
