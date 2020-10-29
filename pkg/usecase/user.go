@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"github.com/trmttty/ca-tech-dojo/domain/model"
-	"github.com/trmttty/ca-tech-dojo/domain/repository"
+	"github.com/trmttty/ca-tech-dojo/pkg/domain/model"
+	"github.com/trmttty/ca-tech-dojo/pkg/domain/repository"
 )
 
 type UserUsecase interface {

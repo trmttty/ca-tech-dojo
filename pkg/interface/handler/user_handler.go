@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/trmttty/ca-tech-dojo/interface/auth"
-	"github.com/trmttty/ca-tech-dojo/usecase"
+	"github.com/trmttty/ca-tech-dojo/pkg/interface/auth"
+	"github.com/trmttty/ca-tech-dojo/pkg/usecase"
 )
 
 type UserHandler interface {

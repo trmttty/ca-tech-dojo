@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/trmttty/ca-tech-dojo/domain/model"
+	"github.com/trmttty/ca-tech-dojo/pkg/domain/model"
 )
 
 type UserRepository interface {

@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/trmttty/ca-tech-dojo/interface/auth"
-	mw "github.com/trmttty/ca-tech-dojo/interface/middlewear"
+	"github.com/trmttty/ca-tech-dojo/pkg/interface/auth"
+	mw "github.com/trmttty/ca-tech-dojo/pkg/interface/middlewear"
 )
 
 func Run(userHandler UserHandler) {

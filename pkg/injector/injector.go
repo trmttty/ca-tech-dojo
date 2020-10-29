@@ -1,10 +1,10 @@
 package injector
 
 import (
-	"github.com/trmttty/ca-tech-dojo/domain/repository"
-	"github.com/trmttty/ca-tech-dojo/infrastructure"
-	"github.com/trmttty/ca-tech-dojo/interface/handler"
-	"github.com/trmttty/ca-tech-dojo/usecase"
+	"github.com/trmttty/ca-tech-dojo/pkg/domain/repository"
+	"github.com/trmttty/ca-tech-dojo/pkg/infrastructure"
+	"github.com/trmttty/ca-tech-dojo/pkg/interface/handler"
+	"github.com/trmttty/ca-tech-dojo/pkg/usecase"
 )
 
 func InjectDB() infrastructure.SqlHandler {

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/trmttty/ca-tech-dojo/injector"
-	"github.com/trmttty/ca-tech-dojo/interface/handler"
+	"github.com/trmttty/ca-tech-dojo/pkg/injector"
+	"github.com/trmttty/ca-tech-dojo/pkg/interface/handler"
 )
 
 func main() {
