@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/trmttty/ca-tech-dojo/pkg/interface/auth"
+	mw "github.com/trmttty/ca-tech-dojo/pkg/interface/middlewear"
 	"github.com/trmttty/ca-tech-dojo/pkg/usecase"
 )
 
@@ -62,7 +62,7 @@ func (handler *userHandler) Post() http.HandlerFunc {
 		}
 
 		var token UserCreateResponse
-		token.Token, err = auth.CreateToken(createdUser.ID)
+		token.Token, err = mw.CreateToken(createdUser.ID)
 		if err != nil {
 			log.Printf("Create token error, %v", err)
 			w.WriteHeader(http.StatusInternalServerError)
