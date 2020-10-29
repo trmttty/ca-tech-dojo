@@ -1,12 +1,13 @@
 package middlewear
 
 import (
-	"context"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/trmttty/ca-tech-dojo/pkg/interface/dcontext"
 
 	jwt "github.com/dgrijalva/jwt-go"
 )
@@ -54,7 +55,7 @@ func Authenticate(h http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 
-		ctx := context.WithValue(r.Context(), "user-id", id)
+		ctx := dcontext.NewContext(r.Context(), id)
 		r = r.WithContext(ctx)
 		h(w, r)
 	}

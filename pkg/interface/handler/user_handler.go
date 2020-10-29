@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/trmttty/ca-tech-dojo/pkg/interface/dcontext"
 	mw "github.com/trmttty/ca-tech-dojo/pkg/interface/middlewear"
 	"github.com/trmttty/ca-tech-dojo/pkg/usecase"
 )
@@ -87,7 +88,11 @@ func (handler *userHandler) Get() http.HandlerFunc {
 			return
 		}
 
-		userID := r.Context().Value("user-id").(int)
+		userID, ok := dcontext.FromContext(r.Context())
+		if !ok {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
 
 		foundUser, err := handler.userUsecase.FindByID(userID)
 		if err != nil {
@@ -122,7 +127,11 @@ func (handler *userHandler) Put() http.HandlerFunc {
 			return
 		}
 
-		userID := r.Context().Value("user-id").(int)
+		userID, ok := dcontext.FromContext(r.Context())
+		if !ok {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
 
 		_, err := handler.userUsecase.Update(userID, userName.Name)
 		if err != nil {
